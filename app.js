@@ -15,7 +15,7 @@ const app = express();
 
 app.set("view engine", "ejs");
 
-app.use(express.urlencoded({ extended: true }))
+app.use(express.urlencoded({ extended: true }));
 app.use(express.static("public"));
 
 //Connect to MongoDB w/ Mongoose
@@ -29,7 +29,7 @@ const postSchema = new mongoose.Schema ({
     content: {
       type: String,
   }
-})
+});
 
 //Create a model
 const Post = mongoose.model("Post", postSchema)
@@ -40,8 +40,8 @@ app.get("/", function(req, res){
       homeStartingContent: homeStartingContent,
       posts: posts,
       truncate: truncate
-    })
-  })
+    });
+  });
 });
 
 app.get("/about", function(req, res){
@@ -64,14 +64,14 @@ app.get('/posts/:postId', (req, res) => {
         postTitle: post.title,
         postContent: post.content
       });
-  })
+  });
 });
 
 app.post("/compose", function(req, res){
   const post = new Post ({
     title: req.body.postTitle,
     content: req.body.postContent
-    })
+    });
 
     post.save(function(err){
       if (!err){
